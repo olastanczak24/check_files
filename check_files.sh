@@ -7,7 +7,7 @@
 # ========================================
 
 # Path to the directory where files are stored
-PATH=""
+DATA_DIR=""
 
 # Define the list of expected file name prefixes (editable)
 EXPECTED_FILES=(
@@ -27,7 +27,7 @@ fi
 DATE_INPUT=$1
 
 # Display header
-echo "Checking files in directory: $PATH"
+echo "Checking files in directory: $DATA_DIR"
 echo "Reference date: $DATE_INPUT"
 echo "----------------------------------------"
 
@@ -38,10 +38,10 @@ for PREFIX in "${EXPECTED_FILES[@]}"; do
   # Check for files from the 3 previous days
   for OFFSET in 1 2 3; do
     # Calculate date OFFSET days before the input date
-    CHECK_DATE=$(date -j -v-"$OFFSET"d -f "%Y%m%d" "$DATE_INPUT" +%Y%m%d)
+    CHECK_DATE=$(date -d "$DATE_INPUT - $OFFSET day" +%Y%m%d)
 
     # Build the full file path
-    FILE="${PATH}/${PREFIX}${CHECK_DATE}.csv"
+    FILE="${DATA_DIR}/${PREFIX}${CHECK_DATE}.csv"
 
     #  Check if file exists and show size
     if [ -f "$FILE" ]; then
