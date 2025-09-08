@@ -1,3 +1,2 @@
-This script checks whether certain '.csv` files exist in a specified directory for the 3 days prior to a given reference date. 
-It also displays the file sizes if they are found.
-
+The script parses "check_files_last_version" scan results, groups them by directory and file type,
+and then compares yesterday’s file line counts with historical medians.
